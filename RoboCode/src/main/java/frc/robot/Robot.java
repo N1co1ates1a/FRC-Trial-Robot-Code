@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -103,11 +102,15 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     robot.tankDrive(xbox.getRawAxis(1), xbox.getRawAxis(3));
 
-    left.set(xbox.getRawAxis(1);
-    right.set(xbox.getRawAxis(3); 
+    if(elup.get() == true){
+      elevator.set(0.5);
+    }else if(eldown.get() == true){
+      elevator.set(-0.5);
+    }
+    else {
+      elevator.set(0);
+    }
 
-    elup.set(xbox.getRawButton(1));
-    eldown.set(xbox.getRawButton(0));
   }
 
   /** This function is called once when the robot is disabled. */
@@ -130,13 +133,17 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {
     if(tiktak.get() <= (double)135) {
-    robot.tankDrive(xbox.getRawAxis(1), xbox.getRawAxis(3));
+    robot.tankDrive(xbox.getRawAxis(1), xbox.getRawAxis(3)); 
 
-    left.set(xbox.getRawAxis(1);
-    right.set(xbox.getRawAxis(3); 
-
-    elup.set(xbox.getRawButton(1));
-    eldown.set(xbox.getRawButton(0));
+    if(elup.get() == true){
+      elevator.set(0.5);
+    }else if(eldown.get() == true){
+      elevator.set(-0.5);
+    }
+    else {
+      elevator.set(0);
+    }
+    
     }//if sonu
 
   }//test periyot sonu
